@@ -1,0 +1,54 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| bank               |
+| company            |
+| mysql              |
+| performance_schema |
+| test               |
+| workers            |
++--------------------+
+7 rows in set (0.00 sec)
+
+mysql> USE workers;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_workers |
++-------------------+
+| employee          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> select*from employee;
++------+--------+-------------+------------+
+| s_no | name   | designation | branch     |
++------+--------+-------------+------------+
+|    1 | Tom    | team leader | rasmapuram |
+|    2 | ramesh | ceo         | lucknow    |
++------+--------+-------------+------------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE workers(s_no integer PRIMARY KEY,name char(10),designation varchar(20),branch varchar(10));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE TABLE workers(name char(10),designation varchar(20),branch varchar(10),s_no INT,FOREIGN KEY(s_no) REFERENCES employee(s_no));
+ERROR 1050 (42S01): Table 'workers' already exists
+mysql> CREATE TABLE workes(name char(10),designation varchar(20),branch varchar(10),s_no INT,FOREIGN KEY(s_no) REFERENCES employee(s_no));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select*from workes;
+Empty set (0.00 sec)
+
+mysql> show columns in workes;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| name        | char(10)    | YES  |     | NULL    |       |
+| designation | varchar(20) | YES  |     | NULL    |       |
+| branch      | varchar(10) | YES  |     | NULL    |       |
+| s_no        | int(11)     | YES  | MUL | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
