@@ -1,0 +1,112 @@
+CREATE DATABASE workers;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> CREATE TABLE Bank(s_no integer PRIMARY KEY,cus_name char(10),acc_no number,balance number,cus_branch varchar(160));
+ERROR 1046 (3D000): No database selected
+mysql> CREATE DATABASE bank
+    -> ;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| bank               |
+| mysql              |
+| performance_schema |
+| test               |
+| workers            |
++--------------------+
+6 rows in set (0.02 sec)
+
+mysql> USE bank;
+Database changed
+mysql> CREATE TABLE Bank(s_no integer PRIMARY KEY,cus_name char(10),acc_no number,balance number,cus_branch varchar(160));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'number,balance number,cus_branch varchar(160))' at line 1
+mysql> CREATE TABLE Bank(s_no integer PRIMARY KEY,cus_name char(10),acc_no integer,balance integer,cus_branch varchar(160));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> CREATE TABLE Bank(s_no integer(10) PRIMARY KEY,cus_name char(10),acc_no integer(20),balance integer(20),cus_branch varchar(160));
+ERROR 1050 (42S01): Table 'bank' already exists
+mysql> SHOW tables
+    -> ;
++----------------+
+| Tables_in_bank |
++----------------+
+| bank           |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SHOW COLUMNS  IN bank;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| s_no       | int(11)      | NO   | PRI | NULL    |       |
+| cus_name   | char(10)     | YES  |     | NULL    |       |
+| acc_no     | int(11)      | YES  |     | NULL    |       |
+| balance    | int(11)      | YES  |     | NULL    |       |
+| cus_branch | varchar(160) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.02 sec)
+
+mysql> INSERT INTO bank VALUES(1,'Tom',528123456,25000,'rasmapuram');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO bank VALUES(2,'ram',526398515,60000,'nandigama');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO bank VALUES(3,'ramesh',529632541,95000,'lucknow');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO bank VALUES(4,'sai',524156985,100000,'gujarat');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO bank VALUES(5,'tagore',524698523,542542,'vijayawada');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> SHOW COLUMNS IN bank;
++------------+--------------+------+-----+---------+-------+
+| Field      | Type         | Null | Key | Default | Extra |
++------------+--------------+------+-----+---------+-------+
+| s_no       | int(11)      | NO   | PRI | NULL    |       |
+| cus_name   | char(10)     | YES  |     | NULL    |       |
+| acc_no     | int(11)      | YES  |     | NULL    |       |
+| balance    | int(11)      | YES  |     | NULL    |       |
+| cus_branch | varchar(160) | YES  |     | NULL    |       |
++------------+--------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW VALUES IN bank
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'VALUES IN bank' at line 1
+mysql> SELECT * FROM bank;
++------+----------+-----------+---------+------------+
+| s_no | cus_name | acc_no    | balance | cus_branch |
++------+----------+-----------+---------+------------+
+|    1 | Tom      | 528123456 |   25000 | rasmapuram |
+|    2 | ram      | 526398515 |   60000 | nandigama  |
+|    3 | ramesh   | 529632541 |   95000 | lucknow    |
+|    4 | sai      | 524156985 |  100000 | gujarat    |
+|    5 | tagore   | 524698523 |  542542 | vijayawada |
++------+----------+-----------+---------+------------+
+5 rows in set (0.01 sec)
+
+mysql> UPDATE bank SET cus_branch='pondicherry' WHERE cus_name='ram';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT *FROM bank;
++------+----------+-----------+---------+-------------+
+| s_no | cus_name | acc_no    | balance | cus_branch  |
++------+----------+-----------+---------+-------------+
+|    1 | Tom      | 528123456 |   25000 | rasmapuram  |
+|    2 | ram      | 526398515 |   60000 | pondicherry |
+|    3 | ramesh   | 529632541 |   95000 | lucknow     |
+|    4 | sai      | 524156985 |  100000 | gujarat     |
+|    5 | tagore   | 524698523 |  542542 | vijayawada  |
++------+----------+-----------+---------+-------------+
+5 rows in set (0.00 sec)
+
+
