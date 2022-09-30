@@ -1,0 +1,8 @@
+DELIMITER //
+CREATE PROCEDURE stored_proc_tutorial.spCountOfBelowAverage(OUT countBelowAverage INT)
+BEGIN
+    DECLARE avgMarks DECIMAL(5,2) DEFAULT 0;
+    SELECT AVG(total_marks) INTO avgMarks FROM studentMarks;
+    SELECT COUNT(*) INTO countBelowAverage FROM studentMarks WHERE total_marks < avgMarks;
+END //
+DELIMITER ;
