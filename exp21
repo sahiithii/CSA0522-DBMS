@@ -1,0 +1,78 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| company            |
+| money              |
+| mysql              |
+| performance_schema |
+| test               |
++--------------------+
+6 rows in set (0.00 sec)
+
+mysql> use money;
+Database changed
+mysql> show tables;
++-----------------+
+| Tables_in_money |
++-----------------+
+| bank            |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> desc bank;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| s_no       | int(11)     | YES  |     | NULL    |       |
+| cus_name   | char(10)    | YES  |     | NULL    |       |
+| acc_no     | int(20)     | YES  |     | NULL    |       |
+| balance    | int(11)     | YES  |     | NULL    |       |
+| cus_branch | varchar(10) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.06 sec)
+
+mysql> select*from bank;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    1 | ram      |   1223 |  100000 | adyar      |
+|    2 | sita     |  12234 |   90876 | mylapore   |
+|    3 | uday     |  12345 |  987654 | chennai    |
++------+----------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select*from bank
+    -> where balance<100000;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    2 | sita     |  12234 |   90876 | mylapore   |
++------+----------+--------+---------+------------+
+1 row in set (0.00 sec)
+
+mysql> update bank
+    -> set cus_branch='pondi'
+    -> where cus_name='sita';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select*from bank;
++------+----------+--------+---------+------------+
+| s_no | cus_name | acc_no | balance | cus_branch |
++------+----------+--------+---------+------------+
+|    1 | ram      |   1223 |  100000 | adyar      |
+|    2 | sita     |  12234 |   90876 | pondi      |
+|    3 | uday     |  12345 |  987654 | chennai    |
++------+----------+--------+---------+------------+
+3 rows in set (0.00 sec)
+
+mysql> drop table bank;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql>
