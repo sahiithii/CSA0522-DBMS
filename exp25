@@ -1,0 +1,24 @@
+import mysql.connector
+
+conn=mysql.connector.connect(host="localhost",port="3306",user="root",password="saipranay",database="hospitaldb")
+cursor=conn.cursor()
+selectquery="select * from doctor"
+cursor.execute(selectquery)
+records=cursor.fetchall()
+
+
+print("no. of doctors in the hospital ",cursor.rowcount)
+print("Doctors details")
+
+
+for row in records:
+    print("Doctor Id:",row[0])
+    print("Doctor name",row[1])
+    print("Email",row[3])
+    print("Contact no",row[4])
+    print("Qualification",row[5])
+    print()
+
+
+cursor.close()
+conn.close()
