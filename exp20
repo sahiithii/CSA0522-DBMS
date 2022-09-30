@@ -1,0 +1,101 @@
+# DBMS
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bank               |
+| employee           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| stud               |
+| sys                |
+| worker             |
+| world              |
++--------------------+
+10 rows in set (0.00 sec)
+
+mysql> use worker
+Database changed
+mysql> create table employe(s_no int(10),name varchar(40),designation varchar(40),branch varchar(30));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> insert into employe(s_no,name,designation,branch)values(1,ajith,manager,chennai);
+ERROR 1054 (42S22): Unknown column 'ajith' in 'field list'
+mysql> insert into employe(s_no,name,designation,branch)values(1,'ajith','manager','chennai');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employe(s_no,name,designation,branch)values(2,'jeevan','manager','chennai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employe(s_no,name,designation,branch)values(3,'nagendra','manager','chennai');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select *from employe;
++------+----------+-------------+---------+
+| s_no | name     | designation | branch  |
++------+----------+-------------+---------+
+|    1 | ajith    | manager     | chennai |
+|    2 | jeevan   | manager     | chennai |
+|    3 | nagendra | manager     | chennai |
++------+----------+-------------+---------+
+3 rows in set (0.00 sec)
+
+mysql> alter table employe
+    -> add salary int(10);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> select *from employe;
++------+----------+-------------+---------+--------+
+| s_no | name     | designation | branch  | salary |
++------+----------+-------------+---------+--------+
+|    1 | ajith    | manager     | chennai |   NULL |
+|    2 | jeevan   | manager     | chennai |   NULL |
+|    3 | nagendra | manager     | chennai |   NULL |
++------+----------+-------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> create table workerr as select * from employe;
+Query OK, 3 rows affected (0.02 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from workerr;
++------+----------+-------------+---------+--------+
+| s_no | name     | designation | branch  | salary |
++------+----------+-------------+---------+--------+
+|    1 | ajith    | manager     | chennai |   NULL |
+|    2 | jeevan   | manager     | chennai |   NULL |
+|    3 | nagendra | manager     | chennai |   NULL |
++------+----------+-------------+---------+--------+
+3 rows in set (0.00 sec)
+
+mysql> delete from workerr
+    -> where name=nagendra;
+ERROR 1054 (42S22): Unknown column 'nagendra' in 'where clause'
+mysql> where name=nagendra;;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name=nagendra' at line 1
+ERROR:
+No query specified
+
+mysql> where name=nagendra;;;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where name=nagendra' at line 1
+ERROR:
+No query specified
+
+ERROR:
+No query specified
+
+mysql> select*from workerr
+    -> select*from workerr;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'select*from workerr' at line 2
+mysql> select * from workerr;
++------+----------+-------------+---------+--------+
+| s_no | name     | designation | branch  | salary |
++------+----------+-------------+---------+--------+
+|    1 | ajith    | manager     | chennai |   NULL |
+|    2 | jeevan   | manager     | chennai |   NULL |
+|    3 | nagendra | manager     | chennai |   NULL |
++------+----------+-------------+---------+--------+
+3 rows in set (0.00 sec)
