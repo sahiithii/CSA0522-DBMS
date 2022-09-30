@@ -1,0 +1,21 @@
+mysql> create procedure p10()
+    -> begin
+    -> select * from course;
+    -> end//
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call p10();
+    -> //
++-----------+-------------+-------------+--------+---------+--------+-------+
+| course_no | course_desc | course_type | sem_no | hall_no | fac_no | score |
++-----------+-------------+-------------+--------+---------+--------+-------+
+| C001      | dbms        | c           | 5      | 303     | 1235   |    79 |
+| C002      | java        | a           | 6      | 623     | 1231   |    60 |
+| C005      | statistics  | e           | 4      | 111     | 1234   |    52 |
+| C010      | python      | b           | 5      | null    | 1232   |    49 |
+| C011      | python      | b           | 5      | 332     | 1233   |    49 |
+| C101      | programming | d           | 3      | 332     | 1233   |    90 |
++-----------+-------------+-------------+--------+---------+--------+-------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.02 sec)
